@@ -22,6 +22,9 @@ import '../../features/chat/pages/chat_page.dart';
 import '../../features/chat/pages/chat_room_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
+import '../../features/email/presentation/pages/email_accounts_page.dart';
+import '../../features/email/presentation/pages/email_messages_page.dart';
+import '../../features/estimate_requests/presentation/pages/estimate_requests_page.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -204,6 +207,42 @@ class AppRouter {
         path: '/profile',
         name: 'profile',
         builder: (context, state) => const ProfilePage(),
+      ),
+
+      // Email Routes
+      GoRoute(
+        path: '/email',
+        name: 'email-accounts',
+        builder: (context, state) => const EmailAccountsPage(),
+      ),
+
+      GoRoute(
+        path: '/email/messages/:accountId',
+        name: 'email-messages',
+        builder: (context, state) {
+          final accountIdParam = state.pathParameters['accountId'];
+          if (accountIdParam == null) {
+            return const Scaffold(
+              body: Center(child: Text('Invalid account ID')),
+            );
+          }
+
+          final accountId = int.tryParse(accountIdParam);
+          if (accountId == null) {
+            return const Scaffold(
+              body: Center(child: Text('Invalid account ID')),
+            );
+          }
+
+          return EmailMessagesPage(accountId: accountId);
+        },
+      ),
+
+      // Estimate Requests Routes
+      GoRoute(
+        path: '/estimate-requests',
+        name: 'estimate-requests',
+        builder: (context, state) => const EstimateRequestsPage(),
       ),
     ],
     errorBuilder: (context, state) => Scaffold(

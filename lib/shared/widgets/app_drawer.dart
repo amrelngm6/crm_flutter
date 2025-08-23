@@ -66,6 +66,12 @@ class AppDrawer extends StatelessWidget {
                       color: const Color(0xFF1B4D3E),
                     ),
                     _DrawerMenuItem(
+                      icon: Icons.request_quote,
+                      title: 'Estimate Requests',
+                      route: '/estimate-requests',
+                      color: const Color(0xFF9C27B0),
+                    ),
+                    _DrawerMenuItem(
                       icon: Icons.article,
                       title: 'Proposals',
                       route: '/proposals',
@@ -82,6 +88,12 @@ class AppDrawer extends StatelessWidget {
                 _buildMenuSection(
                   'Communication',
                   [
+                    _DrawerMenuItem(
+                      icon: Icons.email,
+                      title: 'Emails',
+                      route: '/email',
+                      color: const Color(0xFF2196F3),
+                    ),
                     _DrawerMenuItem(
                       icon: Icons.chat,
                       title: 'Chat',
