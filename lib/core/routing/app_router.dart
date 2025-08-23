@@ -12,6 +12,7 @@ import '../../features/leads/presentation/pages/leads_page.dart';
 import '../../features/tasks/presentation/pages/tasks_page.dart';
 import '../../features/deals/presentation/pages/deals_page.dart';
 import '../../features/estimates/presentation/pages/estimates_page.dart';
+import '../../features/estimates/presentation/pages/estimate_requests_page.dart';
 import '../../features/meetings/presentation/pages/meetings_page.dart';
 import '../../features/tickets/pages/tickets_page.dart';
 import '../../features/tickets/pages/ticket_details_page.dart';
@@ -20,6 +21,8 @@ import '../../features/todos/presentation/pages/todos_page.dart';
 import '../../features/todos/presentation/pages/create_todo_page.dart';
 import '../../features/chat/pages/chat_page.dart';
 import '../../features/chat/pages/chat_room_page.dart';
+import '../../features/email/presentation/pages/email_main_page.dart';
+import '../../features/email/presentation/pages/email_messages_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
 
@@ -76,6 +79,12 @@ class AppRouter {
         path: '/estimates',
         name: 'estimates',
         builder: (context, state) => const EstimatesPage(),
+      ),
+
+      GoRoute(
+        path: '/estimate-requests',
+        name: 'estimate-requests',
+        builder: (context, state) => const EstimateRequestsPage(),
       ),
 
       GoRoute(
@@ -198,6 +207,35 @@ class AppRouter {
         path: '/settings',
         name: 'settings',
         builder: (context, state) => const SettingsPage(),
+      ),
+
+      // Email Routes
+      GoRoute(
+        path: '/email',
+        name: 'email',
+        builder: (context, state) => const EmailMainPage(),
+      ),
+
+      GoRoute(
+        path: '/email/messages/:accountId',
+        name: 'email-messages',
+        builder: (context, state) {
+          final accountIdParam = state.pathParameters['accountId'];
+          if (accountIdParam == null) {
+            return const Scaffold(
+              body: Center(child: Text('Invalid account ID')),
+            );
+          }
+
+          final accountId = int.tryParse(accountIdParam);
+          if (accountId == null) {
+            return const Scaffold(
+              body: Center(child: Text('Invalid account ID')),
+            );
+          }
+
+          return EmailMessagesPage(accountId: accountId);
+        },
       ),
 
       GoRoute(
