@@ -20,6 +20,8 @@ import 'core/providers/tickets_provider.dart';
 import 'core/providers/todos_provider.dart';
 import 'core/providers/chat_provider.dart';
 import 'core/providers/notification_provider.dart';
+import 'core/providers/email_provider.dart';
+import 'core/providers/estimate_requests_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,6 +66,8 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (context) => TodosProvider()),
             ChangeNotifierProvider(create: (context) => ChatProvider()),
             ChangeNotifierProvider(create: (context) => NotificationProvider()),
+            ChangeNotifierProvider(create: (context) => EmailProvider()),
+            ChangeNotifierProvider(create: (context) => EstimateRequestsProvider()),
           ],
           child: Consumer<ThemeProvider>(
             builder: (context, themeProvider, child) {
